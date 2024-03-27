@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-cat ./my-bashrc > ~/.bashrc
+
+source ./config.sh
+
+cat ./my-bashrc > $my_bashrc
+
+source $my_bashrc
