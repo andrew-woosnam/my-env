@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+alias gst='git status'
+alias gstl='git status; git log --oneline -n 8'
