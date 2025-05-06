@@ -10,15 +10,22 @@ set -euo pipefail
 # - Installs standard development tools using the system's package manager
 # - Configures terminal preferences / other environment settings
 #
-# This script assumes the repository has been cloned to $HOME/my-env.
+# This script assumes it is being run from the root of the repository,
+# located at $REPO_DIR/setup.sh
 # -----------------------------------------------------------------------------
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "🎛️ Setting up environment from $REPO_DIR ..."
 
+# Ensure expected subdirectories exist (safe to run even if already present)
+mkdir -p "$REPO_DIR/scripts/macos"
+mkdir -p "$REPO_DIR/scripts/linux"
+mkdir -p "$REPO_DIR/packages"
+mkdir -p "$REPO_DIR/dotfiles"
+
+# Run setup steps
 "$REPO_DIR/scripts/link-dotfiles.sh"
 "$REPO_DIR/scripts/install-packages.sh"
-"$REPO_DIR/scripts/configure-terminal.sh" 
+"$REPO_DIR/scripts/configure-terminal.sh"
 
 echo "🎛️ Environment setup complete ✓"
