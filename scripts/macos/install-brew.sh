@@ -25,7 +25,7 @@ if [[ -f "$PACKAGE_LIST" ]]; then
   while read -r pkg; do
     [[ -z "$pkg" || "$pkg" == \#* ]] && continue  # skip empty lines and comments
     echo "🎛️ 📦 brew install $pkg"
-    brew install "$pkg"
+    brew install "$pkg" || echo "🎛️ 📦 ⚠️ failed to brew install $pkg"
   done < "$PACKAGE_LIST"
 else
   echo "🎛️ 📦 ⚠️ Package list not found at $PACKAGE_LIST"
