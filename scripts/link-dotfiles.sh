@@ -15,7 +15,7 @@ set -euo pipefail
 # - Environments remain consistent and portable across machines
 # -----------------------------------------------------------------------------
 
-REPO_DIR="$HOME/my-env"
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DOTFILES_DIR="$REPO_DIR/dotfiles"
 BACKUP_DIR="$HOME/.dotfile_backups"
 

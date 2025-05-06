@@ -13,7 +13,7 @@ set -euo pipefail
 # This script assumes the repository has been cloned to $HOME/my-env.
 # -----------------------------------------------------------------------------
 
-REPO_DIR="$HOME/my-env"
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 echo "🎛️ Setting up environment from $REPO_DIR ..."
 

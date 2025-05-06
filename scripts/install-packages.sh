@@ -16,7 +16,7 @@ set -euo pipefail
 
 echo "🎛️ 📦 installing packages ..."
 
-REPO_DIR="$HOME/my-env"
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 OS_TYPE="$(uname)"
 
 case "$OS_TYPE" in

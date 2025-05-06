@@ -11,7 +11,7 @@ set -euo pipefail
 
 echo "🎛️ 📦 [macos] installing packages via supported package managers ..."
 
-REPO_DIR="$HOME/my-env"
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MANAGER_SCRIPTS_DIR="$REPO_DIR/scripts/macos"
 
 # Define the supported package managers (must match script and package list)
