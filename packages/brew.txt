@@ -1,0 +1,19 @@
+# Shell & environment
+zsh
+fzf
+
+# Core tools
+git
+tmux
+ripgrep
+
+# Editor
+neovim
+
+# Utilities
+htop
+tree
+
+# Networking / debugging
+curl
+wget
