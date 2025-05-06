@@ -7,7 +7,10 @@ set -euo pipefail
 # Ensures Homebrew is installed and installs packages defined in packages/brew.txt.
 # -----------------------------------------------------------------------------
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
 LOG_DOMAIN="📦 [BREW]"
 source "$REPO_DIR/scripts/lib/log.sh"
 

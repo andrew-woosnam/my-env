@@ -9,7 +9,10 @@ set -euo pipefail
 # and a matching package list under packages/<tool>.txt.
 # -----------------------------------------------------------------------------
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
 LOG_DOMAIN="📦 🍎"
 source "$REPO_DIR/scripts/lib/log.sh"
 
