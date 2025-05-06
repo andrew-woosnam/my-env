@@ -9,7 +9,7 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-LOG_DOMAIN="📦 🧰"
+LOG_DOMAIN="📦 [NPM]"
 source "$REPO_DIR/scripts/lib/log.sh"
 
 PACKAGE_LIST="$REPO_DIR/packages/npm.txt"
