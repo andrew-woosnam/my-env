@@ -14,9 +14,9 @@ set -euo pipefail
 # based on the location of this file.
 # -----------------------------------------------------------------------------
 
-# Resolve the directory containing this script (setup.sh)
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 REPO_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+export REPO_DIR
 
 source "$REPO_DIR/scripts/lib/log.sh"
 log "Setting up environment from $REPO_DIR ..."

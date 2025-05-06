@@ -7,10 +7,10 @@ set -euo pipefail
 # Applies terminal-level configuration such as default shell.
 # -----------------------------------------------------------------------------
 
-SCRIPT_PATH="${BASH_SOURCE[0]}"
-SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
-REPO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-
+if [[ -z "${REPO_DIR:-}" ]]; then
+  echo "❌ REPO_DIR is not set. Run this script via setup.sh or define REPO_DIR manually." >&2
+  exit 1
+fi
 LOG_DOMAIN="🖥️"
 source "$REPO_DIR/scripts/lib/log.sh"
 
