@@ -9,12 +9,14 @@ set -euo pipefail
 # and a matching package list under packages/<tool>.txt.
 # -----------------------------------------------------------------------------
 
-echo "🎛️ 📦 [macos] installing packages via supported package managers ..."
-
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+LOG_DOMAIN="📦 🍎"
+source "$REPO_DIR/scripts/lib/log.sh"
+
 MANAGER_SCRIPTS_DIR="$REPO_DIR/scripts/macos"
 
-# Define the supported package managers (must match script and package list)
+log "installing packages via supported package managers ..."
+
 package_managers=(
   brew
   npm
@@ -27,8 +29,8 @@ for manager in "${package_managers[@]}"; do
   if [[ -x "$script" ]]; then
     "$script"
   else
-    echo "🎛️ 📦 ⚠️ Skipping $manager: script not found or not executable at $script"
+    log "⚠️ Skipping $manager: script not found or not executable at $script"
   fi
 done
 
-echo "🎛️ 📦 [macos] all package manager installs complete ✓"
+log "all package manager installs complete ✓"

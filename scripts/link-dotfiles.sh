@@ -16,11 +16,13 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+LOG_DOMAIN="🔗"
+source "$REPO_DIR/scripts/lib/log.sh"
+
 DOTFILES_DIR="$REPO_DIR/dotfiles"
 BACKUP_DIR="$HOME/.dotfile_backups"
 
-echo "🎛️ 🔗 linking dotfiles ..."
-
+log "linking dotfiles ..."
 mkdir -p "$BACKUP_DIR"
 
 link_file() {
@@ -33,9 +35,11 @@ link_file() {
         timestamp=$(date +%Y%m%d-%H%M%S)
         backup_path="$BACKUP_DIR/${filename}.${timestamp}.bak"
         mv "$dest" "$backup_path"
+        log "backed up $dest → $backup_path"
     fi
 
     ln -sf "$src" "$dest"
+    log "linked $filename → $dest"
 }
 
 # Process all hidden files (dotfiles) in dotfiles directory
@@ -49,4 +53,4 @@ for src in "$DOTFILES_DIR"/.*; do
     link_file "$src" "$dest"
 done
 
-echo "🎛️ 🔗 dotfile linking complete ✓"
+log "dotfile linking complete ✓"

@@ -14,9 +14,12 @@ set -euo pipefail
 # - Installing the listed packages
 # -----------------------------------------------------------------------------
 
-echo "🎛️ 📦 installing packages ..."
-
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+LOG_DOMAIN="📦"
+source "$REPO_DIR/scripts/lib/log.sh"
+
+log "installing packages ..."
+
 OS_TYPE="$(uname)"
 
 case "$OS_TYPE" in
@@ -27,14 +30,14 @@ case "$OS_TYPE" in
     if [[ -f /etc/debian_version ]]; then
       "$REPO_DIR/scripts/linux/debian-packages.sh"
     else
-      echo "🎛️ 📦 ⚠️ Linux detected, but unsupported distribution."
+      log "⚠️ Linux detected, but unsupported distribution."
       exit 1
     fi
     ;;
   *)
-    echo "🎛️ 📦 ⚠️ Unsupported OS: $OS_TYPE"
+    log "⚠️ Unsupported OS: $OS_TYPE"
     exit 1
     ;;
 esac
 
-echo "🎛️ 📦 package installation complete ✓"
+log "package installation complete ✓"

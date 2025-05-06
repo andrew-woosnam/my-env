@@ -15,7 +15,9 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "🎛️ Setting up environment from $REPO_DIR ..."
+source "$REPO_DIR/scripts/lib/log.sh"
+
+log "Setting up environment from $REPO_DIR ..."
 
 # Ensure expected subdirectories exist (safe to run even if already present)
 mkdir -p "$REPO_DIR/scripts/macos"
@@ -28,4 +30,4 @@ mkdir -p "$REPO_DIR/dotfiles"
 "$REPO_DIR/scripts/install-packages.sh"
 "$REPO_DIR/scripts/configure-terminal.sh"
 
-echo "🎛️ Environment setup complete ✓"
+log "Environment setup complete ✓"
