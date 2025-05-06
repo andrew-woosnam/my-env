@@ -15,3 +15,37 @@ precmd() {
         (( DURATION > 10 )) && echo "Last command took $DURATION seconds"
     fi
 }
+
+# Dump text files in repo with confirmation
+dir_dump() {
+  local files
+  files=()
+
+  while IFS= read -r file; do
+    files+=("$file")
+  done < <(
+    find . -type f \
+      ! -path '*/.git/*' \
+      ! -path '*/node_modules/*' \
+      -exec file --mime {} + |
+      grep -v 'charset=binary' |
+      cut -d: -f1
+  )
+
+  echo "📂 The following text files will be printed:"
+  for f in "${files[@]}"; do
+    echo " - $f"
+  done
+
+  echo
+  read "confirm?Proceed with printing contents of these files? [y/N] "
+  [[ "$confirm" =~ ^[Yy]$ ]] || {
+    echo "❌ Aborted."
+    return 1
+  }
+
+  for f in "${files[@]}"; do
+    echo -e "\n# ─── $f ─────────────────────────────────────"
+    cat "$f"
+  done
+}
