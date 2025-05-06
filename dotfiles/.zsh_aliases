@@ -1,0 +1,29 @@
+# ~/.zsh_aliases
+
+# Skip if this shell is non-interactive (e.g. scripts, cron jobs)
+[[ -o interactive ]] || return
+
+# File and directory listing
+alias ll="ls -lh"
+alias la="ls -lAh"
+alias l='ls -gGF'
+
+# Git aliases
+alias g="git"
+alias gp="git pull"
+alias gst="git status"
+alias gstl="git status; git log --oneline -n 8"
+
+# Process management
+alias psaux='ps aux | grep -v "[p]s aux"'
+
+# Terraform
+alias tf='terraform'
+alias tfp="terraform plan"
+
+# K8s
+alias k='kubectl'
+alias kctx="kubectl config current-context"
+
+# Other tools
+alias v="nvim"

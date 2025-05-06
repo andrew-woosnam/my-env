@@ -1,0 +1,17 @@
+# ~/.zsh_scripts
+
+# Skip if this shell is non-interactive (e.g. scripts, cron jobs)
+[[ -o interactive ]] || return
+
+# Track the time before each command execution
+preexec() {
+    LAST_COMMAND_TIME=$SECONDS
+}
+
+# Display the time after each command execution
+precmd() {
+    if [[ -n ${LAST_COMMAND_TIME:-} ]]; then
+        DURATION=$((SECONDS - LAST_COMMAND_TIME))
+        (( DURATION > 10 )) && echo "Last command took $DURATION seconds"
+    fi
+}
