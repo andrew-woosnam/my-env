@@ -1,0 +1,12 @@
+# Formatters / linters
+prettier
+eslint
+
+# HTTP / CLI utilities
+http-server
+serve
+npm-check
+
+# Dev tools
+ts-node
+nodemon
