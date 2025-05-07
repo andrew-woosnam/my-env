@@ -5,13 +5,10 @@ set -euo pipefail
 # setup.sh
 #
 # Entrypoint for configuring a development environment.
-# Performs the following actions:
-# - Symlinks version-controlled dotfiles from this repository into the home directory
-# - Installs standard development tools using the system's package manager
-#
-# This script can be run from anywhere and resolves the repository directory
-# based on the location of this file.
 # -----------------------------------------------------------------------------
+
+# Error handling
+trap 'echo "❌ ERROR: Command failed at line $LINENO. Check the output above for details."' ERR
 
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 REPO_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
@@ -19,6 +16,10 @@ export REPO_DIR
 
 source "$REPO_DIR/scripts/lib/log.sh"
 log "Setting up environment from $REPO_DIR ..."
+
+# Create required directories and empty package files if needed
+mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
+touch "$REPO_DIR/packages/"{brew,npm,pnpm,apt}.txt
 
 # Check for critical files in the expected repo structure
 required_paths=(
@@ -36,10 +37,6 @@ for path in "${required_paths[@]}"; do
     exit 1
   fi
 done
-
-# Create required directories and empty package files if needed
-mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
-touch "$REPO_DIR/packages/"{brew,npm,pnpm,apt}.txt
 
 # Make all scripts executable
 find "$REPO_DIR/scripts" -name "*.sh" -type f -exec chmod +x {} \;
