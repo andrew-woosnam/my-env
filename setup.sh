@@ -8,7 +8,6 @@ set -euo pipefail
 # Performs the following actions:
 # - Symlinks version-controlled dotfiles from this repository into the home directory
 # - Installs standard development tools using the system's package manager
-# - Configures terminal preferences / other environment settings
 #
 # This script can be run from anywhere and resolves the repository directory
 # based on the location of this file.
@@ -25,7 +24,6 @@ log "Setting up environment from $REPO_DIR ..."
 required_paths=(
   "$REPO_DIR/scripts/link-dotfiles.sh"
   "$REPO_DIR/scripts/install-packages.sh"
-  "$REPO_DIR/scripts/configure-terminal.sh"
   "$REPO_DIR/scripts/lib/log.sh"
 )
 
@@ -45,6 +43,5 @@ mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
 # Run setup steps
 "$REPO_DIR/scripts/link-dotfiles.sh"
 "$REPO_DIR/scripts/install-packages.sh"
-"$REPO_DIR/scripts/configure-terminal.sh"
 
 log "Environment setup complete ✓"
