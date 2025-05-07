@@ -6,7 +6,7 @@ set -euo pipefail
 #
 # Top-level entrypoint for installing globally used package managers and their
 # associated packages. Delegates to a platform-specific install script, which
-# further delegates to one script per package manager (e.g., brew, npm, pnpm).
+# further delegates to one script per package manager (e.g., brew, npm).
 #
 # Each package manager's script handles:
 # - Ensuring the package manager is available

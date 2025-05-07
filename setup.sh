@@ -19,7 +19,7 @@ log "Setting up environment from $REPO_DIR ..."
 
 # Create required directories and empty package files if needed
 mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
-touch "$REPO_DIR/packages/"{brew,npm,pnpm,apt}.txt
+touch "$REPO_DIR/packages/"{brew,npm,apt}.txt
 
 # Check for critical files in the expected repo structure
 required_paths=(

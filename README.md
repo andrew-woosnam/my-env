@@ -65,7 +65,7 @@ cd ~/my-env
   - **macOS**:
 
     - Homebrew (`brew`) for core tools
-    - `npm` and `pnpm` for Node-based tools
+    - `npm` for Node-based tools
 
   - **Debian-based Linux**:
 

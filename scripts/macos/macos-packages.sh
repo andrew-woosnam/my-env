@@ -23,7 +23,6 @@ log "installing packages via supported package managers ..."
 package_managers=(
   brew
   npm
-  pnpm
 )
 
 for manager in "${package_managers[@]}"; do
