@@ -41,6 +41,9 @@ done
 mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
 touch "$REPO_DIR/packages/"{brew,npm,pnpm,apt}.txt
 
+# Make all scripts executable
+find "$REPO_DIR/scripts" -name "*.sh" -type f -exec chmod +x {} \;
+
 # Run setup steps
 "$REPO_DIR/scripts/link-dotfiles.sh"
 "$REPO_DIR/scripts/install-packages.sh"
