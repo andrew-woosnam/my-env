@@ -37,8 +37,9 @@ for path in "${required_paths[@]}"; do
   fi
 done
 
-# Ensure expected subdirectories exist (safe to run even if already present)
+# Create required directories and empty package files if needed
 mkdir -p "$REPO_DIR"/{scripts/macos,scripts/linux,packages,dotfiles}
+touch "$REPO_DIR/packages/"{brew,npm,pnpm,apt}.txt
 
 # Run setup steps
 "$REPO_DIR/scripts/link-dotfiles.sh"
