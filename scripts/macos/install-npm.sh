@@ -4,36 +4,46 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 # install-npm.sh
 #
-# Ensures Node.js and npm are installed (via Homebrew),
-# then installs global npm packages defined in packages/npm.txt.
+# Ensures Node.js and npm are available (via Homebrew).
+# Installs global npm packages listed in packages/npm.txt.
+# Skips gracefully if installation is not possible.
 # -----------------------------------------------------------------------------
 
-if [[ -z "${REPO_DIR:-}" ]]; then
-  echo "❌ REPO_DIR is not set. Run this script via setup.sh or define REPO_DIR manually." >&2
-  exit 1
-fi
+# Resolve repo root and logger
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOG_DOMAIN="📦 [NPM]"
 source "$REPO_DIR/scripts/lib/log.sh"
 
 PACKAGE_LIST="$REPO_DIR/packages/npm.txt"
 
-# Ensure Node.js and npm are installed
+# Ensure npm (and node) is installed
 if ! command -v npm &>/dev/null; then
-  log "npm not found. Installing via Homebrew..."
-  brew install node
+  log "npm not found. Attempting install via Homebrew..."
+
+  if command -v brew &>/dev/null; then
+    brew install node || {
+      log "⚠️ Failed to install node/npm via Homebrew. Skipping npm packages."
+      return 0
+    }
+  else
+    log "⚠️ Homebrew not available. Cannot install npm. Skipping."
+    return 0
+  fi
 else
   log "npm already installed ✓"
 fi
 
-# Install packages
+# Install packages from npm.txt
 if [[ -f "$PACKAGE_LIST" ]]; then
   while read -r pkg; do
     [[ -z "$pkg" || "$pkg" == \#* ]] && continue
     log "npm install -g $pkg"
-    npm install -g "$pkg" || log "⚠️ failed to npm install $pkg"
+    npm install -g "$pkg" || log "⚠️ Failed to npm install $pkg"
   done < "$PACKAGE_LIST"
 else
   log "⚠️ Package list not found at $PACKAGE_LIST"
 fi
 
-log "package installation complete ✓"
+log "npm package installation complete ✓"
