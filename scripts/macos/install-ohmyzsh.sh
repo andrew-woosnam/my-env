@@ -24,7 +24,7 @@ if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
   RUNZSH=no KEEP_ZSHRC=yes \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || {
       log "⚠️ Failed to install Oh My Zsh. Continuing without it."
-      return 0
+      exit 0  # Changed from return 0
     }
 
   log "Oh My Zsh installation complete ✓"

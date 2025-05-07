@@ -25,11 +25,11 @@ if ! command -v npm &>/dev/null; then
   if command -v brew &>/dev/null; then
     brew install node || {
       log "⚠️ Failed to install node/npm via Homebrew. Skipping npm packages."
-      return 0
+      exit 0  # Changed from return 0
     }
   else
     log "⚠️ Homebrew not available. Cannot install npm. Skipping."
-    return 0
+    exit 0  # Changed from return 0
   fi
 else
   log "npm already installed ✓"

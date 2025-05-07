@@ -28,14 +28,14 @@ if ! command -v brew &>/dev/null; then
   # If the user can't write to the install dir, skip Homebrew
   if [[ ! -w "$BREW_PREFIX" ]]; then
     log "⚠️ No write access to $BREW_PREFIX. Skipping Homebrew install."
-    return 0
+    exit 0  # Changed from return 0
   fi
 
   # Attempt installation
   log "Installing Homebrew ..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || {
     log "⚠️ Homebrew install failed. Continuing without it."
-    return 0
+    exit 0  # Changed from return 0
   }
 else
   log "Homebrew already installed ✓"
